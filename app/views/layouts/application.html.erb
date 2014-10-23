@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+  <div class="row header_page">
+    <div class="row">
+      <div class="small-10 large-10 columns">
+        <div class="text-left">
+          <h3 class="color_font" id="ml-header_current_visitor_tool" name="ml-header_current_visitor_tool"> CTS-Come to The Shop</h3>
+        </div>
+      </div>
+      <div class="small-2 large-2 columns">
+        <!--<img id="btn_lang" onclick="set_lang();" class="btn_lang" src="http://vmio.e-demo.jp/cts/img/en.png">-->
+        <%= image_tag('en.png', class: 'btn_lang')%>
+      </div>
+    </div>
+    <!-- menu -->    
+    <div class="row">
+      <div class="small-11 large-11 columns menu_tool_new ">
+        <ul>
+          <li><a href="#" id="ml-help" name="ml-help">HELP</a></li>
+          <li><a href="#" id="ml-copyright" name="ml-copyright">Copyright</a></li>
+          <% if signed_in? %>
+            <li><a href="#">New Shop</a></li>
+            <li><%= link_to "Logout ",logout_path %></li>
+          <% else %>
+            <li><%= link_to "Login ",login_path %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="small-1 large-1 columns menu_tool_new "></div>
+    </div>
+    <!-- /menu -->   
+  </div><!-- /header_page -->
+  <!-- content -->
+  <div class="row">
+    <div class="small-12 large-12 columns content_page">
+      <div class="row">
+        <div class="small-2 large-2 columns"></div>
+          <center>
+            <font color="red">
+                <div class="small-10 large-10 columns" align="center">
+                   <%= yield %>
+                </div>
+            </font>
+          </center>
+        </div>
+      </div>  
+  </div>
+  <!-- /content -->
+  <font color="red">   
+         
+         <!-- End::content-->
+         <!-- footer-->
+    <div class="row ">
+      <div class="small-12 large-12 columns footer_page">
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 large-12 columns">
+        <p id="copyright"> Copyright© 2014 M@NewCo,.Ltd. All Rights </p>
+      </div>
+    </div>
+     
+        
+    
+
+</font>
+  <%= javascript_include_tag "application" %>
+  </body>
+</html>
