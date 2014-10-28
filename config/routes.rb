@@ -1,15 +1,24 @@
-Rails.application.routes.draw do
-  
+Rails.application.routes.draw do  
+
   get 'sessions/new'
+
+  controller :shops do
+    get 'shoplist' => :shoplist
+    get 'newshop' => :new_shop
+  end  
+  
 
   resources :shop_members
   get 'shop_members/new'
-
+  get 'shops/test'
+  
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     get 'logout' => :destroy
   end
+
+  #root to: 'sessions#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

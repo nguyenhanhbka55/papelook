@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
   	@shop_member = ShopMember.authenticate(params[:staff_email], params[:password])
 		if @shop_member		
-			flash[:notice] = "You've been logged in."		
+			flash[:alert] = "You've been logged in."		    
 			session[:shop_member_id] = @shop_member.id
 			#render shop_member_path    
       render "shop_members/show"
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 			redirect_to login_path
 		end
   end
-  
+    
   def destroy
   	session.clear
     flash[:notice] = "You've been logged out successfully."

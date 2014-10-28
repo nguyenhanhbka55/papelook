@@ -31,7 +31,7 @@
           <li><a href="#" id="ml-help" name="ml-help">HELP</a></li>
           <li><a href="#" id="ml-copyright" name="ml-copyright">Copyright</a></li>
           <% if signed_in? %>
-            <li><a href="#">New Shop</a></li>
+            <li><%= link_to "New Shop" ,newshop_path %></li>
             <li><%= link_to "Logout ",logout_path %></li>
           <% else %>
             <li><%= link_to "Login ",login_path %></li>
@@ -70,11 +70,7 @@
       <div class="small-12 large-12 columns">
         <p id="copyright"> Copyright© 2014 M@NewCo,.Ltd. All Rights </p>
       </div>
-    </div>
-     
-        
-    
-
+    </div>           
 </font>
   <%= javascript_include_tag "application" %>
   </body>
