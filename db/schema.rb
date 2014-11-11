@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111030527) do
+ActiveRecord::Schema.define(version: 20141111035954) do
 
   create_table "available_benefits", id: false, force: true do |t|
     t.string "shopId",       limit: 100,                    null: false
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 20141111030527) do
   end
 
   create_table "available_benefits_all", id: false, force: true do |t|
-    t.string  "text",         limit: 300,                         null: false
     t.integer "benefitId",                     default: 0,        null: false
     t.string  "shopId",       limit: 100,                         null: false
     t.string  "title",        limit: 100,                         null: false
+    t.string  "text",         limit: 300,                         null: false
     t.binary  "image",        limit: 16777215,                    null: false
     t.date    "valid_from",                                       null: false
     t.date    "valid_to",                                         null: false
@@ -70,6 +70,64 @@ ActiveRecord::Schema.define(version: 20141111030527) do
 
   add_index "beacons", ["beaconUniqueId", "majorCode", "minorCode"], name: "beaconUniqueId", unique: true, using: :btree
 
+  create_table "checkin_info_all", id: false, force: true do |t|
+    t.integer "shopId",                                default: 0,                     null: false
+    t.string  "shopName",             limit: 100,                                      null: false
+    t.string  "shopNameFurigana",     limit: 100,                                      null: false
+    t.string  "shopAdd",              limit: 300,                                      null: false
+    t.string  "shopEmail",            limit: 50,                                       null: false
+    t.string  "shopTel",              limit: 50,                                       null: false
+    t.string  "shopUrl",              limit: 300,                                      null: false
+    t.string  "shopIconExt",          limit: 10,       default: "png",                 null: false
+    t.string  "shopImageExt",         limit: 10,       default: "png",                 null: false
+    t.string  "shopHeadline",         limit: 300,                                      null: false
+    t.string  "shopTestimonials",     limit: 300,                                      null: false
+    t.string  "country",              limit: 50,                                       null: false
+    t.string  "city",                 limit: 50,                                       null: false
+    t.binary  "shopIconBinary",       limit: 16777215
+    t.binary  "shopImgBinary",        limit: 16777215
+    t.binary  "shopRankIconBinary",   limit: 16777215
+    t.integer "shopRate",                              default: 1
+    t.string  "shopStatus",           limit: 5,        default: "1",                   null: false
+    t.string  "shopFastCheckinLimit", limit: 10,       default: "30",                  null: false
+    t.time    "shopStartCheck",                        default: '2000-01-01 10:00:00', null: false
+    t.integer "totalPerShopMonth",    limit: 8
+    t.integer "totalPerShop",         limit: 8
+    t.string  "memberId",             limit: 100
+    t.string  "memberRank",           limit: 100
+    t.integer "memberCheckinPoint",   limit: 8
+    t.string  "deviceId",             limit: 100
+  end
+
+  create_table "checkin_info_alls", id: false, force: true do |t|
+    t.integer "shopId"
+    t.string  "shopName",             limit: 100
+    t.string  "shopNameFurigana",     limit: 100
+    t.string  "shopAdd",              limit: 300
+    t.string  "shopEmail",            limit: 50
+    t.string  "shopTel",              limit: 50
+    t.string  "shopUrl",              limit: 300
+    t.string  "shopIconExt",          limit: 10
+    t.string  "shopImageExt",         limit: 10
+    t.string  "shopHeadline",         limit: 300
+    t.string  "shopTestimonials",     limit: 300
+    t.string  "country",              limit: 50
+    t.string  "city",                 limit: 50
+    t.binary  "shopIconBinary",       limit: 16777215
+    t.binary  "shopImgBinary",        limit: 16777215
+    t.binary  "shopRankIconBinary",   limit: 16777215
+    t.integer "shopRate"
+    t.string  "shopStatus",           limit: 5
+    t.string  "shopFastCheckinLimit", limit: 10
+    t.time    "shopStartCheck"
+    t.integer "totalPerShopMonth",    limit: 8
+    t.integer "totalPerShop",         limit: 8
+    t.string  "memberId",             limit: 100
+    t.string  "memberRank",           limit: 100
+    t.integer "memberCheckinPoint",   limit: 8
+    t.string  "deviceId",             limit: 100
+  end
+
   create_table "checkininfo", id: false, force: true do |t|
     t.string   "deviceId",                  limit: 100
     t.string   "beaconId",                  limit: 100
@@ -111,6 +169,14 @@ ActiveRecord::Schema.define(version: 20141111030527) do
     t.integer  "countPerDeviceByShop", limit: 8,   default: 0, null: false
     t.datetime "lastCheckinTime"
     t.datetime "nowCheckinTime"
+  end
+
+  create_table "checkinpermembyshopmonth", id: false, force: true do |t|
+    t.string  "deviceId",                  limit: 100,             null: false
+    t.string  "beaconId",                  limit: 100,             null: false
+    t.string  "shopId",                    limit: 50,              null: false
+    t.string  "memberId",                  limit: 100,             null: false
+    t.integer "countPerDeviceMonthByShop", limit: 8,   default: 0, null: false
   end
 
   create_table "checkinpermembyshopmonths", id: false, force: true do |t|
@@ -194,6 +260,30 @@ ActiveRecord::Schema.define(version: 20141111030527) do
   end
 
   add_index "members", ["memberEmail"], name: "memberEmail", using: :btree
+
+  create_table "membershipinfo", id: false, force: true do |t|
+    t.integer  "memberId",                       default: 0,    null: false
+    t.string   "shopId",             limit: 100,                null: false
+    t.string   "memberStatus",       limit: 50,  default: "1",  null: false
+    t.string   "memberName",         limit: 100
+    t.string   "memberNameFurikana", limit: 100
+    t.date     "memberDoB"
+    t.string   "memberAdd",          limit: 300
+    t.string   "memberTel",          limit: 50
+    t.string   "memberSex",          limit: 100
+    t.string   "memberEmail",        limit: 50,                 null: false
+    t.string   "memberPassword",     limit: 200,                null: false
+    t.string   "memberLanguage",     limit: 10,  default: "en", null: false
+    t.string   "memberRank",         limit: 100,                null: false
+    t.datetime "jointDate",                                     null: false
+    t.string   "memberNote",         limit: 300,                null: false
+    t.string   "memberFavorite",     limit: 300,                null: false
+    t.string   "memberDislike",      limit: 300,                null: false
+    t.string   "memberOther",        limit: 300,                null: false
+    t.string   "member_watch",       limit: 10,                 null: false
+    t.integer  "memberShowPoint",                default: 1,    null: false
+    t.integer  "memberCheckinPoint", limit: 8,   default: 0,    null: false
+  end
 
   create_table "memberships", primary_key: "recId", force: true do |t|
     t.string   "memberId",            limit: 100,             null: false
