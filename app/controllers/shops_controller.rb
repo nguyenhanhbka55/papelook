@@ -1,24 +1,21 @@
-#require 'Device'
-
-
 class ShopsController < ApplicationController
-	#respond_to :json
+
+	#before_create :validate_shop_id
 	def index
 		redirect_to :action => 'shoplist'
-	end	
-
-	def shoplist
-		#@shops = Shop.find_by_sql("select * from shop")
-
+	end		
+	
+	def shoplist	
+		#check post request	
 		if request.post?
-			@deviceId=params[:deviceId] ? params[:deviceId] : null
-			#deviceId=params[:deviceId]
+			@deviceId=params[:deviceId] ? params[:deviceId] : ''			
 			if(!params[:deviceId].nil?)
 				@deviceId=params[:deviceId]
 			else
 				@deviceId= ""
 			end			
 		end
+
 		if request.get?
 			if(!params[:deviceId].nil?)
 				@deviceId=params[:deviceId]
@@ -26,9 +23,6 @@ class ShopsController < ApplicationController
 				@deviceId = ""
 			end			
 		end
-
-		# add log debug
-		#end log
 
 		@json_shop_detail = []
 		#check @deviceId
@@ -51,7 +45,9 @@ class ShopsController < ApplicationController
 				@shopId=''
 			end
 		end
-
+		case 
+			
+		end
 		#case ..when method post and get
 		#case request
 		#	when post

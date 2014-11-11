@@ -12,4 +12,5 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_shop_member
   helper_method :signed_in?
+  @language = 'jp'  
 end

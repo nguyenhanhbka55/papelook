@@ -20,6 +20,6 @@ class CreateDevices < ActiveRecord::Migration
   add_index "devices", ["deviceId"], name: "deviceId", using: :btree
   end
   def self.down
-  	drop_table "devices"
+  	drop_table :devices
   end
 end

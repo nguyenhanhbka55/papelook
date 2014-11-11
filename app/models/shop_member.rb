@@ -1,4 +1,6 @@
 class ShopMember < ActiveRecord::Base
+	#scope :staff_email, -> { where(staff_email: true) }
+	scope :created_before, ->(time) { where("created_at < ?", time) }
 	attr_accessor :password
 
 	EMAIl_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i

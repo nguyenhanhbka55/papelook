@@ -2,7 +2,8 @@ class CreateShops < ActiveRecord::Migration
   def self.up
 
     #create view sql 
-        
+    #create view relation_name as  
+      
   	create_table "shops", primary_key: "shopId", force: true do |t|
     t.string    "shopName",               limit: 100,                                      null: false
     t.string    "shopName_jp",            limit: 300

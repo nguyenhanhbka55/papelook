@@ -1,0 +1,8 @@
+default: &default
+	PUSHER_URL: https://github.com/nguyenhanhbka55
+	
+development:
+  <<: *default
+
+test:
+  <<: *default

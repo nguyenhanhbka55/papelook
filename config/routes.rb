@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     get 'shoplist' => :shoplist
     get 'newshop' => :new_shop
   end  
-  
+
+  get 'shop_members/test'
 
   resources :shop_members
-  get 'shop_members/new'
-  get 'shops/test'
+  get 'shop_members/new' 
   
   controller :sessions do
     get 'login' => :new
